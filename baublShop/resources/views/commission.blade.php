@@ -14,13 +14,11 @@
                         </div>
                     @endif
 
-                    You are logged in!
+                    please answer a few questions, to locate a baubl builder near you:
 
                     <div class="content">
                         <div class="links">
-                            <a href="{{ url('design') }}">design a baubl</a>
-                            <a href="{{ url('buy') }}">buy a baubl</a>
-                            <a href="{{ url('commission') }}">commission a baubl</a>
+                            <a href="{{ route('home') }}">go to homepage</a>
                         </div>
                     </div>
                 </div>

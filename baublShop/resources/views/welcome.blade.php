@@ -83,8 +83,8 @@
                 </div>
 
                 <div class="links">
-                    <a href="">make a baubl</a>
-                    <a href="">find a baubl</a>
+                    <a href="">design a baubl</a>
+                    <a href="">buy a baubl</a>
                     <a href="">order a baubl</a>
                 </div>
             </div>
