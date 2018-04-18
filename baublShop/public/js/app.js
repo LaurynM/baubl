@@ -47435,7 +47435,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 
-var questions = {
+var nQuestions = {
     length: {
         '14"': 'collar',
         '16"': 'choker',
@@ -47472,17 +47472,17 @@ var questions = {
 };
 
 var q = 0;
-var list = Object.getOwnPropertyNames(questions);
+var nList = Object.getOwnPropertyNames(nQuestions);
 
 function design(jewelry) {
     if (jewelry === 'necklaces') {
-        $.each(questions, function (key, value) {
-            $('.question').append('<p hidden class="' + key + '">' + key + '</p>');
+        $.each(nQuestions, function (key, value) {
+            $('.question').append('<p class="' + key + '" hidden="hidden">' + key + '</p>');
             $.each(value, function (option, description) {
-                $('p.' + key).append('\n                <div hidden class="col opt animated zoomIn ' + key + '" data-opt="' + option + '">\n                    <div class="choice" onclick="next()">' + option + ' : ' + description + '</div>\n                </div>\n                ');
+                $('p.' + key).append('\n                <div class="col opt animated zoomIn ' + key + '" data-opt="' + option + '" data-key="' + key + '">\n                    <div class="choice">' + option + ' : ' + description + '</div>\n                </div>\n                ');
             });
         });
-        var start = list[q];
+        var start = nList[q];
         $('.' + start).removeAttr('hidden');
     }
 }
@@ -47490,51 +47490,37 @@ function finish(i) {
     i.removeClass('zoomIn').addClass('zoomOut');
     i.attr('hidden', true);
 }
-function getQuote() {}
-
+function getQuote() {
+    alert('quote submission');
+}
 /* harmony default export */ __webpack_exports__["default"] = ({
     mounted: function mounted() {
         this.$nextTick(function () {
             // Code that will run only after the
             // entire view has been rendered
-
             $(".answer").click(function () {
                 console.log('jewelry chosen: ' + $(this).text());
                 finish($('.type'));
                 design($(this).text());
             });
+            $('.question').on('click', '.opt', function (e) {
+                var o = $(this).data('opt');
+                var k = $(this).data('key');
+                console.log(k + ': ' + o);
+                finish($('p[class=' + k + ']'));
 
-            $(".choice").on("click", function () {
-                var o = $(this).parent().data('opt');
-                console.log(o + ': ' + $(this));
-                finish($('div[data-opt=' + o + ']'));
-                q += 1;
-                if (q < questions.length) {
-                    $('.' + list[q]).attr('hidden', false);
+                var nextQ = $(this).parent().next('p');
+                console.log(nextQ.length);
+
+                if (nextQ.length === 1) {
+                    nextQ.attr('hidden', false);
                 } else {
                     getQuote();
                 }
             });
 
-            function next() {
-                var o = $(this).parent().data('opt');
-                console.log(o + ': ' + $(this));
-                finish($('div[data-opt=' + o + ']'));
-                q += 1;
-                if (q < questions.length) {
-                    $('.' + list[q]).attr('hidden', false);
-                } else {
-                    getQuote();
-                }
-            }
-
             console.log('rendering complete!');
         });
-
-        // $("button").click(function(){
-        //     $(this).hide();
-        // })
-
     }
 });
 
