@@ -47473,6 +47473,7 @@ var nQuestions = {
 
 var q = 0;
 var nList = Object.getOwnPropertyNames(nQuestions);
+var jewelrySpecs = {};
 
 function design(jewelry) {
     if (jewelry === 'necklaces') {
@@ -47490,9 +47491,8 @@ function finish(i) {
     i.removeClass('zoomIn').addClass('zoomOut');
     i.attr('hidden', true);
 }
-function getQuote() {
-    alert('quote submission');
-}
+function getQuote() {}
+
 /* harmony default export */ __webpack_exports__["default"] = ({
     mounted: function mounted() {
         this.$nextTick(function () {
@@ -47506,11 +47506,12 @@ function getQuote() {
             $('.question').on('click', '.opt', function (e) {
                 var o = $(this).data('opt');
                 var k = $(this).data('key');
+                jewelrySpecs[k] = o;
                 console.log(k + ': ' + o);
+
                 finish($('p[class=' + k + ']'));
 
                 var nextQ = $(this).parent().next('p');
-                console.log(nextQ.length);
 
                 if (nextQ.length === 1) {
                     nextQ.attr('hidden', false);
@@ -47518,7 +47519,6 @@ function getQuote() {
                     getQuote();
                 }
             });
-
             console.log('rendering complete!');
         });
     }

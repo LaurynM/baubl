@@ -21,3 +21,11 @@ Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/design', 'HomeController@design')->name('design');
 Route::get('/buy', 'HomeController@buy')->name('buy');
 Route::get('/commission', 'HomeController@commission')->name('commission');
+
+// Email related routes
+ 
+use baubl\Mail\OrderShipped;
+Route::get('/design', function () {
+   Mail::to('info@baubl.shop')->send(new OrderShipped);
+   return view('emails.mailme');
+});

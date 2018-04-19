@@ -37,4 +37,8 @@ class HomeController extends Controller
     {
         return view('commission');
     }
+    public function email()
+    {
+        return view('email');
+    }
 }

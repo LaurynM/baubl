@@ -15,8 +15,8 @@ return [
     */
 
     'mailgun' => [
-        'domain' => env('MAILGUN_DOMAIN'),
-        'secret' => env('MAILGUN_SECRET'),
+        'domain' => 'https://api.mailgun.net/v3/baubl.shop',
+        'secret' => 'key-5163aa7708c20083d3e6530d36c9f103',
     ],
 
     'ses' => [

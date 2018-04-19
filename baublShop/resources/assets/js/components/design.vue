@@ -52,6 +52,7 @@ var nQuestions = {
 
 var q = 0;
 var nList = Object.getOwnPropertyNames(nQuestions);
+var jewelrySpecs = {};
 
 
 function design(jewelry){
@@ -75,8 +76,10 @@ function finish(i){
     i.attr('hidden', true);
 }
 function getQuote(){
- alert('quote submission')
+ 
+        
 }
+
     export default {
         mounted: function () {
             this.$nextTick(function () {
@@ -90,11 +93,12 @@ function getQuote(){
                 $('.question').on('click', '.opt', function(e) {
                     var o = $(this).data('opt');
                     var k = $(this).data('key');
+                    jewelrySpecs[k] = o;
                     console.log(k + ': ' + o);
+
                     finish($( `p[class=${k}]` ));
 
                     var nextQ = $(this).parent().next('p');
-                    console.log(nextQ.length);
 
                     if (nextQ.length === 1) {
                         nextQ.attr('hidden', false);
@@ -102,7 +106,6 @@ function getQuote(){
                         getQuote();
                     }
                 });
-
                 console.log('rendering complete!')
             })  
         }

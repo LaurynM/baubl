@@ -11,12 +11,6 @@
             @endif
             <div>describe your ideal baubl<div>
             <design></design>
-            <!-- <div class="card">
-                <div class="card-header">welcome to baubl</div>
-
-                <div class="card-body">
-                </div>
-            </div> -->
         </div>
     </div>
 </div>
