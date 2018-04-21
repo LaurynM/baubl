@@ -9,7 +9,7 @@
                 <div class="answer">necklaces</div>
             </div>
         </div>
-
+        <div id="email" hidden="true">your quote request has been sent. we will contact you shortly.</div>
     </div> <!-- close container -->
 </template>
 
@@ -75,10 +75,49 @@ function finish(i){
     i.removeClass('zoomIn').addClass('zoomOut');
     i.attr('hidden', true);
 }
-function getQuote(){
- 
-        
+
+
+
+function submitOrder(){
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.post('order', {jewelrySpecs}, function(data,status) {
+     console.log(`Order Status: ${status}`);
+     if (status == 'Success'){
+         getQuote();
+     }
+ })
+// $.ajax({
+//     type: "POST",
+//     url: '/order',
+//     data: { length: jewelrySpecs.length,
+//             cord: jewelrySpecs.cord,
+//             value: jewelrySpecs.value,
+//             weight: jewelrySpecs.weight,
+//             colors: jewelrySpecs.colors,
+//             _token: '{{csrf_token()}}' },
+//     success: function (data) {
+//        console.log(data);
+//     },
+//     error: function (data, textStatus, errorThrown) {
+//         console.log(data);
+
+//     },
+// });
 }
+ function getQuote(){
+ $.get('/quote', jewelrySpecs, function(data,status) {
+     console.log(`Email Status: ${status}`);
+ })     
+}
+
+function showView(){
+    $('#email').attr('hidden', false);
+}
+
 
     export default {
         mounted: function () {
@@ -103,7 +142,9 @@ function getQuote(){
                     if (nextQ.length === 1) {
                         nextQ.attr('hidden', false);
                     } else {
-                        getQuote();
+                        // submitOrder();
+                        // getQuote();
+                        showView();
                     }
                 });
                 console.log('rendering complete!')

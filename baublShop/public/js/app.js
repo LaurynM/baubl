@@ -47491,7 +47491,46 @@ function finish(i) {
     i.removeClass('zoomIn').addClass('zoomOut');
     i.attr('hidden', true);
 }
-function getQuote() {}
+
+function submitOrder() {
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $.post('order', { jewelrySpecs: jewelrySpecs }, function (data, status) {
+        console.log('Order Status: ' + status);
+        if (status == 'Success') {
+            getQuote();
+        }
+    });
+    // $.ajax({
+    //     type: "POST",
+    //     url: '/order',
+    //     data: { length: jewelrySpecs.length,
+    //             cord: jewelrySpecs.cord,
+    //             value: jewelrySpecs.value,
+    //             weight: jewelrySpecs.weight,
+    //             colors: jewelrySpecs.colors,
+    //             _token: '{{csrf_token()}}' },
+    //     success: function (data) {
+    //        console.log(data);
+    //     },
+    //     error: function (data, textStatus, errorThrown) {
+    //         console.log(data);
+
+    //     },
+    // });
+}
+function getQuote() {
+    $.get('/quote', jewelrySpecs, function (data, status) {
+        console.log('Email Status: ' + status);
+    });
+}
+
+function showView() {
+    $('#email').attr('hidden', false);
+}
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     mounted: function mounted() {
@@ -47516,7 +47555,9 @@ function getQuote() {}
                 if (nextQ.length === 1) {
                     nextQ.attr('hidden', false);
                 } else {
-                    getQuote();
+                    // submitOrder();
+                    // getQuote();
+                    showView();
                 }
             });
             console.log('rendering complete!');
@@ -47558,6 +47599,10 @@ var staticRenderFns = [
           },
           [_c("div", { staticClass: "answer" }, [_vm._v("necklaces")])]
         )
+      ]),
+      _vm._v(" "),
+      _c("div", { attrs: { id: "email", hidden: "true" } }, [
+        _vm._v("your quote request has been sent. we will contact you shortly.")
       ])
     ])
   }

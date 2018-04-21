@@ -1,6 +1,6 @@
-@extends('layouts.app')
+@extends('design')
 
-@section('content')
+@section('email')
 <div class="container">
     <div class="row justify-content-center">
         <div class="col-md-8" style="text-align:center;">
